@@ -3,7 +3,6 @@
 import * as React from "react";
 import { projects } from "@/data/projects";
 import { ProjectCard } from "../ui/ProjectCard";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const filters = ["ALL", "PRODUCT DESIGN", "DESIGN SYSTEMS", "MOBILE", "WEB", "BRANDING"];
@@ -23,7 +22,7 @@ export function WorkGrid() {
             </span>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <h2 className="font-serif text-[3.5rem] md:text-[5rem] lg:text-[6rem] text-[var(--on-background)] leading-[0.9] tracking-tight">
-                Things I've<br/>Designed
+                Things I&#39;ve<br/>Designed
               </h2>
               <span className="font-mono text-sm text-[var(--on-surface-variant)] tracking-widest md:mb-4">
                 2021 — 2025

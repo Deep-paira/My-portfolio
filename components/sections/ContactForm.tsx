@@ -16,7 +16,7 @@ export function ContactForm() {
   const [isSuccess, setIsSuccess] = React.useState(false);
 
   const validate = () => {
-    let tempErrors: Record<string, string> = {};
+    const tempErrors: Record<string, string> = {};
     if (!formData.name.trim()) tempErrors.name = "Name is required";
     if (!formData.email.trim()) {
       tempErrors.email = "Email is required";
@@ -55,9 +55,9 @@ export function ContactForm() {
     <section className="w-full py-20 px-6 md:px-12 lg:px-24">
        <div className="mx-auto w-full max-w-3xl">
           <div className="mb-16">
-            <h2 className="font-serif text-[2.5rem] md:text-[3.5rem] text-on-background leading-[1] tracking-tight">Let's Talk.</h2>
+            <h2 className="font-serif text-[2.5rem] md:text-[3.5rem] text-on-background leading-[1] tracking-tight">Let&#39;s Talk.</h2>
             <p className="font-sans text-on-surface-variant text-xl mt-6">
-              Have a project in mind? Fill out the form below and I'll get back to you within 48 hours.
+              Have a project in mind? Fill out the form below and I&#39;ll get back to you within 48 hours.
             </p>
           </div>
 

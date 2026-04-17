@@ -35,10 +35,10 @@ export function AboutContent() {
             </h2>
             <div className="flex flex-col gap-6 font-sans text-xl text-[var(--on-surface-variant)] leading-relaxed mt-4 max-w-2xl">
               <p>
-                I'm a Full-Stack Developer focused on creating modern, scalable web applications that respect the user's time and intelligence. Specializing in the React ecosystem and Django backends, I translate complex technical requirements into fluid, intuitive interfaces.
+                I&#39;m a Full-Stack Developer focused on creating modern, scalable web applications that respect the user&#39;s time and intelligence. Specializing in the React ecosystem and Django backends, I translate complex technical requirements into fluid, intuitive interfaces.
               </p>
               <p>
-                My practice is rooted in systemic thinking. I believe great software isn't just about what ends up on the screen, but the structural integrity behind it—how a database scales, an API adapts, and an entire application evolves.
+                My practice is rooted in systemic thinking. I believe great software isn&#39;t just about what ends up on the screen, but the structural integrity behind it—how a database scales, an API adapts, and an entire application evolves.
               </p>
             </div>
           </div>
@@ -83,7 +83,7 @@ export function AboutContent() {
               href="/contact" 
               className="mt-4 sm:mt-0 font-sans text-xs font-semibold tracking-wider text-[var(--on-primary-container)] bg-[var(--primary-container)] px-6 py-3 rounded-full hover:opacity-90 transition-opacity uppercase drop-shadow-md"
             >
-              LET'S TALK
+              LET&#39;S TALK
             </Link>
           </div>
 

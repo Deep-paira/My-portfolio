@@ -43,7 +43,7 @@ export function Hero() {
           </motion.div>
           
           <motion.p variants={item} className="font-sans text-lg md:text-xl text-on-surface-variant max-w-md leading-relaxed mt-4">
-            Hi, I'm Deep. A UI/UX Designer elevating digital products through rigorous editorial minimalism and strategic storytelling.
+            Hi, I&#39;m Deep. A UI/UX Designer elevating digital products through rigorous editorial minimalism and strategic storytelling.
           </motion.p>
 
           <motion.div variants={item} className="flex flex-wrap items-center gap-4 mt-6">
