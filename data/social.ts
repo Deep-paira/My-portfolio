@@ -3,17 +3,17 @@ import { SocialLink } from "@/types";
 export const socialLinks: SocialLink[] = [
   {
     platform: "Twitter",
-    url: "https://twitter.com",
+    url: "https://x.com/x_delta_55",
     icon: "Twitter"
   },
   {
     platform: "LinkedIn",
-    url: "https://linkedin.com",
+    url: "https://www.linkedin.com/in/deep-paira-989ab1344/",
     icon: "Linkedin"
   },
   {
-    platform: "Dribbble",
-    url: "https://dribbble.com",
-    icon: "Dribbble"
+    platform: "GitHub",
+    url: "https://github.com/Deep-paira",
+    icon: "Github"
   }
 ];
