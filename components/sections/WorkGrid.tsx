@@ -25,7 +25,7 @@ export function WorkGrid() {
                 Things I&#39;ve<br/>Designed
               </h2>
               <span className="font-mono text-sm text-[var(--on-surface-variant)] tracking-widest md:mb-4">
-                2021 — 2025
+                2024 — 2026
               </span>
             </div>
           </div>

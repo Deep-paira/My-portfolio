@@ -73,3 +73,27 @@
               color 0.6s cubic-bezier(0.23, 1, 0.32, 1),
               fill 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.3333%); }
+}
+
+@keyframes marquee-right {
+  0%   { transform: translateX(-33.3333%); }
+  100% { transform: translateX(0); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 12px;
+}
+
+.marquee-row-1 { animation: marquee-left 35s linear infinite; }
+.marquee-row-2 { animation: marquee-right 28s linear infinite; }
+
+.marquee-wrapper:hover .marquee-row-1,
+.marquee-wrapper:hover .marquee-row-2 {
+  animation-play-state: paused;
+}

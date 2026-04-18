@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Button } from "../ui/Button";
+import { cn } from "@/lib/utils";
 
 export function ContactForm() {
   const [formData, setFormData] = React.useState({
@@ -68,7 +69,7 @@ export function ContactForm() {
                 </div>
              )}
 
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-4">
                 {/* Name */}
                 <div className="relative flex flex-col">
                   <input 
@@ -78,11 +79,17 @@ export function ContactForm() {
                     value={formData.name}
                     onChange={handleChange}
                     className="peer w-full bg-transparent border-b border-outline-variant/40 py-3 text-on-background font-sans focus:border-primary focus:outline-none transition-colors"
-                    placeholder=" "
+                    placeholder=""
                   />
                   <label 
                     htmlFor="name" 
-                    className="absolute left-0 top-3 text-on-surface-variant transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-widest peer-focus:text-primary peer-not-placeholder-shown:-top-4 peer-not-placeholder-shown:text-[10px] peer-not-placeholder-shown:uppercase peer-not-placeholder-shown:tracking-widest pointer-events-none font-sans"
+                    className={cn(
+                      "absolute left-0 transition-all pointer-events-none font-sans",
+                      formData.name.length > 0 
+                        ? "-top-4 text-[10px] uppercase tracking-widest text-on-surface-variant" 
+                        : "top-3 text-on-surface-variant",
+                      "peer-focus:-top-4 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-widest peer-focus:text-primary"
+                    )}
                   >
                     Your Name
                   </label>
@@ -98,11 +105,17 @@ export function ContactForm() {
                     value={formData.email}
                     onChange={handleChange}
                     className="peer w-full bg-transparent border-b border-outline-variant/40 py-3 text-on-background font-sans focus:border-primary focus:outline-none transition-colors"
-                    placeholder=" "
+                    placeholder=""
                   />
                   <label 
                     htmlFor="email" 
-                    className="absolute left-0 top-3 text-on-surface-variant transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-widest peer-focus:text-primary peer-not-placeholder-shown:-top-4 peer-not-placeholder-shown:text-[10px] peer-not-placeholder-shown:uppercase peer-not-placeholder-shown:tracking-widest pointer-events-none font-sans"
+                    className={cn(
+                      "absolute left-0 transition-all pointer-events-none font-sans",
+                      formData.email.length > 0 
+                        ? "-top-4 text-[10px] uppercase tracking-widest text-on-surface-variant" 
+                        : "top-3 text-on-surface-variant",
+                      "peer-focus:-top-4 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-widest peer-focus:text-primary"
+                    )}
                   >
                     Email Address
                   </label>
@@ -111,7 +124,7 @@ export function ContactForm() {
              </div>
 
              {/* Project Type */}
-             <div className="relative flex flex-col border-b border-outline-variant/40 py-2">
+             <div className="relative flex flex-col border-b border-outline-variant/40 py-2 mt-2">
                   <select 
                     id="projectType" 
                     name="projectType"
@@ -119,17 +132,22 @@ export function ContactForm() {
                     onChange={handleChange}
                     className="w-full bg-transparent border-none text-on-background font-sans appearance-none focus:outline-none transition-all cursor-pointer"
                   >
-                    <option value="" disabled className="text-on-surface-variant">Select Project Type</option>
-                    <option value="product-design">Product Design</option>
-                    <option value="ux-audit">UX Audit</option>
-                    <option value="design-system">Design System</option>
-                    <option value="other">Other</option>
+                    <option value="" disabled className="bg-background text-on-surface-variant font-sans">Select Project Type</option>
+                    <option value="product-design" className="bg-background text-on-background font-sans">Product Design</option>
+                    <option value="ux-audit" className="bg-background text-on-background font-sans">UX Audit</option>
+                    <option value="design-system" className="bg-background text-on-background font-sans">Design System</option>
+                    <option value="other" className="bg-background text-on-background font-sans">Other</option>
                   </select>
+                  <div className="absolute right-0 top-1/2 -translate-y-[20%] pointer-events-none text-on-surface-variant">
+                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
                   {errors.projectType && <span className="text-red-400 text-xs mt-2">{errors.projectType}</span>}
              </div>
 
              {/* Message */}
-             <div className="relative flex flex-col mt-4">
+             <div className="relative flex flex-col mt-6">
                   <textarea 
                     id="message" 
                     name="message"
@@ -137,11 +155,17 @@ export function ContactForm() {
                     onChange={handleChange}
                     rows={4}
                     className="peer w-full bg-transparent border-b border-outline-variant/40 py-3 text-on-background font-sans focus:border-primary focus:outline-none transition-colors resize-none"
-                    placeholder=" "
+                    placeholder=""
                   />
                   <label 
                     htmlFor="message" 
-                    className="absolute left-0 top-3 text-on-surface-variant transition-all peer-focus:-top-6 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-widest peer-focus:text-primary peer-not-placeholder-shown:-top-6 peer-not-placeholder-shown:text-[10px] peer-not-placeholder-shown:uppercase peer-not-placeholder-shown:tracking-widest pointer-events-none font-sans"
+                    className={cn(
+                      "absolute left-0 transition-all pointer-events-none font-sans",
+                      formData.message.length > 0 
+                        ? "-top-6 text-[10px] uppercase tracking-widest text-on-surface-variant" 
+                        : "top-3 text-on-surface-variant",
+                      "peer-focus:-top-6 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-widest peer-focus:text-primary"
+                    )}
                   >
                     Project Details
                   </label>

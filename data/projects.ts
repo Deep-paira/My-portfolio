@@ -6,7 +6,7 @@ export const projects: Project[] = [
     title: "Finance Dashboard Redesign",
     description: "Redesigned a complex fintech dashboard reducing user drop-off by 40%",
     tags: ["Product Design", "Figma", "UX Research"],
-    year: "2024",
+    year: "2025",
     size: "large",
     cardBg: "surface",
     imageUrl: "/projects/finance_dashboard.png"
@@ -26,7 +26,7 @@ export const projects: Project[] = [
     title: "Component Library & Design System",
     description: "Built a scalable design system with 120+ reusable components",
     tags: ["Design Systems", "Tokens", "Figma"],
-    year: "2023",
+    year: "2025",
     size: "small",
     cardBg: "card",
     imageUrl: "/projects/design_system.png"
@@ -36,7 +36,7 @@ export const projects: Project[] = [
     title: "E-Commerce App Redesign",
     description: "Full UX overhaul of a fashion e-commerce app, 3x conversion lift",
     tags: ["Mobile", "UX", "Branding"],
-    year: "2023",
+    year: "2026",
     size: "large",
     cardBg: "dark-split",
     imageUrl: "/projects/ecommerce_app.png"
