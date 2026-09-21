@@ -13,7 +13,7 @@ export interface Skill {
   name: string;
   category: string;
 }
-
+ 
 export interface SocialLink {
   platform: string;
   url: string;

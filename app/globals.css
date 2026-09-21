@@ -4,32 +4,32 @@
 
 @layer base {
   :root {
-    --background: #fafaf9;
-    --on-background: #111111;
-    --primary-container: #6C4EFF;
-    --surface-container-low: #ffffff;
-    --surface-container-high: #f4f4f5;
-    --outline-variant: #e5e5e5;
-    --primary: #9471FF;
-    --surface: #ffffff;
-    --on-surface-variant: #666666;
-    --on-primary-container: #ffffff;
-    --primary-fixed-dim: #6C4EFF;
-    --success: #16A34A;
+    --background: #FAF6F0;
+    --on-background: #221E1C;
+    --primary-container: #B05433;
+    --surface-container-low: #F3ECE2;
+    --surface-container-high: #EAE1D3;
+    --outline-variant: #E2D7C8;
+    --primary: #C4623F;
+    --surface: #FAF6F0;
+    --on-surface-variant: #6E645E;
+    --on-primary-container: #FAF6F0;
+    --primary-fixed-dim: #C4623F;
+    --success: #2E7D47;
   }
 
   .dark {
-    --background: #131313;
-    --on-background: #E5E2E1;
-    --primary-container: #6C4EFF;
-    --surface-container-low: #1C1B1B;
-    --surface-container-high: #2A2A2A;
-    --outline-variant: #474556;
-    --primary: #C8BFFF;
-    --surface: #131313;
-    --on-surface-variant: #C9C4D9;
-    --on-primary-container: #F6F1FF;
-    --primary-fixed-dim: #C8BFFF;
+    --background: #1C1917;
+    --on-background: #F5EFEB;
+    --primary-container: #C4623F;
+    --surface-container-low: #262220;
+    --surface-container-high: #332D2A;
+    --outline-variant: #443C37;
+    --primary: #D97754;
+    --surface: #1C1917;
+    --on-surface-variant: #B5ABA3;
+    --on-primary-container: #1C1917;
+    --primary-fixed-dim: #D97754;
     --success: #4ADE80;
   }
 
@@ -90,10 +90,23 @@
   gap: 12px;
 }
 
-.marquee-row-1 { animation: marquee-left 35s linear infinite; }
-.marquee-row-2 { animation: marquee-right 28s linear infinite; }
+.marquee-row-1 { animation: marquee-left 46s linear infinite; }
+.marquee-row-2 { animation: marquee-right 40s linear infinite; }
 
 .marquee-wrapper:hover .marquee-row-1,
 .marquee-wrapper:hover .marquee-row-2 {
   animation-play-state: paused;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.animate-shine {
+  animation: shine 5s linear infinite;
 }

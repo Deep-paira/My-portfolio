@@ -9,7 +9,7 @@ const filters = ["ALL", "PRODUCT DESIGN", "DESIGN SYSTEMS", "MOBILE", "WEB", "BR
 
 export function WorkGrid() {
   const [activeFilter, setActiveFilter] = React.useState("ALL");
-
+ 
   return (
     <section className="w-full py-16 px-6 md:px-12 lg:px-24">
       <div className="mx-auto w-full max-w-7xl">

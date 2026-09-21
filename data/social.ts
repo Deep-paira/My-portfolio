@@ -2,18 +2,13 @@ import { SocialLink } from "@/types";
 
 export const socialLinks: SocialLink[] = [
   {
-    platform: "Twitter",
-    url: "https://x.com/x_delta_55",
-    icon: "Twitter"
+    platform: "GitHub",
+    url: "https://github.com/Deep-paira",
+    icon: "Github",
   },
   {
     platform: "LinkedIn",
-    url: "https://www.linkedin.com/in/deep-paira-989ab1344/",
-    icon: "Linkedin"
+    url: "https://linkedin.com/in/deep-paira",
+    icon: "Linkedin",
   },
-  {
-    platform: "GitHub",
-    url: "https://github.com/Deep-paira",
-    icon: "Github"
-  }
 ];

@@ -9,12 +9,14 @@ export function ContactForm() {
     name: "",
     email: "",
     projectType: "",
-    message: ""
+    message: "",
+    honeypot: "",
   });
   
   const [errors, setErrors] = React.useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
+  const [serverError, setServerError] = React.useState<string | null>(null);
 
   const validate = () => {
     const tempErrors: Record<string, string> = {};
@@ -32,15 +34,42 @@ export function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setServerError(null);
+
     if (validate()) {
       setIsSubmitting(true);
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      setFormData({ name: "", email: "", projectType: "", message: "" });
-      
-      setTimeout(() => setIsSuccess(false), 5000);
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            subject: formData.projectType,
+            message: formData.message,
+            honeypot: formData.honeypot,
+          }),
+        });
+
+        const data = await response.json().catch(() => null);
+
+        if (!response.ok) {
+          throw new Error(data?.error || "Failed to send message. Please try again.");
+        }
+
+        setIsSuccess(true);
+        setFormData({ name: "", email: "", projectType: "", message: "", honeypot: "" });
+        setErrors({});
+        
+        setTimeout(() => setIsSuccess(false), 6000);
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : "Something went wrong. Please try again later.";
+        setServerError(message);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -49,6 +78,9 @@ export function ContactForm() {
     setFormData(prev => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: "" }));
+    }
+    if (serverError) {
+      setServerError(null);
     }
   };
 
@@ -63,9 +95,29 @@ export function ContactForm() {
           </div>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-10">
+             {/* Honeypot field (hidden from real users, catches spam bots) */}
+             <div className="opacity-0 absolute -z-10 select-none pointer-events-none h-0 w-0 overflow-hidden" aria-hidden="true">
+               <label htmlFor="company_title">Leave this field empty</label>
+               <input 
+                 type="text" 
+                 id="company_title" 
+                 name="honeypot" 
+                 tabIndex={-1} 
+                 autoComplete="off" 
+                 value={formData.honeypot} 
+                 onChange={handleChange} 
+               />
+             </div>
+
              {isSuccess && (
                 <div className="p-6 bg-success/10 text-success border border-success/20 rounded-[12px] font-sans text-sm tracking-wide">
-                  Message sent successfully! Thanks for reaching out.
+                  Message sent successfully! Thanks for reaching out. I&#39;ll get back to you soon.
+                </div>
+             )}
+
+             {serverError && (
+                <div className="p-6 bg-red-500/10 text-red-400 border border-red-500/20 rounded-[12px] font-sans text-sm tracking-wide">
+                  {serverError}
                 </div>
              )}
 
