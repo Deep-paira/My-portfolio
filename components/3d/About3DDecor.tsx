@@ -11,7 +11,7 @@ class SafeAboutBoundary extends React.Component<
     super(props);
     this.state = { hasError: false };
   }
-
+ 
   static getDerivedStateFromError() {
     return { hasError: true };
   }

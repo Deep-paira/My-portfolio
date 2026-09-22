@@ -32,7 +32,7 @@ export const skillCategories: SkillGroup[] = [
   {
     category: "3D & Animation",
     description: "Tactile motion design, canvas interaction & kinetic storytelling",
-    skills: ["Three.js", "Framer Motion", "Adobe After Effects"],
+    skills: ["Three.js", "Framer Motion", "Spline Design"]
   },
   {
     category: "Design & Tools",

@@ -13,10 +13,11 @@ import { cn } from "@/lib/utils";
 
 const filters = [
   "ALL",
-  "PRODUCT DESIGN",
-  "DESIGN SYSTEMS",
-  "MOBILE",
-  "WEB",
+  "REACT",
+  "PYTHON",
+  "TYPESCRIPT",
+  "TAILWIND CSS",
+  "DJANGO",
 ];
 
 export function SelectedWorkSection() {
@@ -127,6 +128,8 @@ export function SelectedWorkSection() {
                 ? "md:col-span-5"
                 : "md:col-span-7";
 
+            const cardBgImage = project.bgImage || project.imageUrl || project.image;
+
             return (
               <motion.div
                 key={project.id}
@@ -145,24 +148,25 @@ export function SelectedWorkSection() {
                   onClick={() => setSelectedProject(project)}
                   className="group relative flex flex-col justify-between overflow-hidden rounded-[18px] bg-[var(--surface-container-low)] border border-[var(--outline-variant)]/70 p-7 sm:p-8 transition-all duration-400 hover:border-[var(--primary)]/50 hover:shadow-[0_8px_30px_rgba(42,36,33,0.06)] cursor-pointer h-full min-h-[420px]"
                 >
-                  {/* Project Image Preview with Restrained Zoom */}
-                  {project.imageUrl && (
+                  {/* Dedicated High-Resolution Background Imagery with Dark-Mode Overlay Masking */}
+                  {cardBgImage && (
                     <div className="absolute inset-0 z-0 overflow-hidden">
                       <Image
-                        src={project.imageUrl}
+                        src={cardBgImage}
                         alt={project.title}
                         fill
-                        className="object-cover object-top opacity-35 dark:opacity-25 transition-transform duration-700 ease-out group-hover:scale-[1.03] group-hover:opacity-60 dark:group-hover:opacity-50"
+                        className="object-cover object-center opacity-30 dark:opacity-20 transition-transform duration-700 ease-out group-hover:scale-[1.04] group-hover:opacity-50 dark:group-hover:opacity-40"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface-container-low)] via-[var(--surface-container-low)]/85 to-transparent" />
+                      {/* Dark contrast overlay layer for high-contrast readable copy */}
+                      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[var(--surface-container-low)] via-[var(--surface-container-low)]/85 to-[var(--surface-container-low)]/40 pointer-events-none" />
                     </div>
                   )}
 
                   {/* Top Metadata Plate */}
                   <div className="relative z-10 flex items-center justify-between">
                     <span className="font-mono text-[11px] tracking-widest text-[var(--on-surface-variant)] uppercase group-hover:text-[var(--primary)] transition-colors">
-                      {`${project.year} // ${project.tags[0]}`}
+                      {`${project.year || "2025"}${project.subtitle ? ` // ${project.subtitle}` : ` // ${project.tags[0]}`}`}
                     </span>
 
                     <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--background)] border border-[var(--outline-variant)]/80 text-[var(--on-background)] transition-all duration-300 group-hover:bg-[var(--primary)] group-hover:text-[#FAF6F0] group-hover:border-[var(--primary)]">
@@ -216,15 +220,16 @@ export function SelectedWorkSection() {
                 transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
                 className="w-full max-w-4xl max-h-[90vh] bg-[var(--background)] rounded-[20px] p-7 md:p-12 overflow-y-auto pointer-events-auto flex flex-col relative shadow-2xl border border-[var(--outline-variant)]"
               >
-                {selectedProject.imageUrl && (
+                {(selectedProject.bgImage || selectedProject.imageUrl || selectedProject.image) && (
                   <div className="relative w-full h-[260px] md:h-[360px] rounded-[14px] overflow-hidden mb-8 border border-[var(--outline-variant)]/60">
                     <Image
-                      src={selectedProject.imageUrl}
+                      src={selectedProject.bgImage || selectedProject.imageUrl || selectedProject.image || ""}
                       alt={selectedProject.title}
                       fill
-                      className="object-cover object-top"
+                      className="object-cover object-center"
                       sizes="(max-width: 1024px) 100vw, 900px"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)]/60 via-transparent to-transparent pointer-events-none" />
                   </div>
                 )}
 
@@ -237,7 +242,7 @@ export function SelectedWorkSection() {
 
                 <div className="flex flex-col gap-4">
                   <span className="font-mono text-xs text-[var(--primary)] tracking-widest uppercase">
-                    {`${selectedProject.year} // CASE STUDY`}
+                    {`${selectedProject.year || "2025"} // ${selectedProject.subtitle || selectedProject.tagline || "CASE STUDY"}`}
                   </span>
                   <h3 className="font-serif text-3xl md:text-4xl text-[var(--on-background)]">
                     {selectedProject.title}
@@ -255,25 +260,53 @@ export function SelectedWorkSection() {
                     {selectedProject.description}
                   </p>
 
-                  <div className="mt-8 flex flex-col gap-6 border-t border-[var(--outline-variant)] pt-8">
-                    <div className="flex flex-col gap-2">
+                  {/* Key Highlights & Architecture Features */}
+                  {selectedProject.features && selectedProject.features.length > 0 && (
+                    <div className="mt-8 flex flex-col gap-4 border-t border-[var(--outline-variant)] pt-6">
                       <h4 className="font-serif text-xl text-[var(--on-background)]">
-                        The Challenge
+                        Key Architecture &amp; Highlights
                       </h4>
-                      <p className="font-sans text-[var(--on-surface-variant)] text-sm md:text-base leading-relaxed">
-                        The objective was to redesign complex interfaces into a frictionless, elegant workflow. By conducting user interviews and journey mapping, we identified the key friction points that caused drop-off.
-                      </p>
+                      <ul className="space-y-2.5">
+                        {selectedProject.features.map((feature, idx) => (
+                          <li
+                            key={idx}
+                            className="flex items-start gap-3 font-sans text-sm md:text-base text-[var(--on-surface-variant)] leading-relaxed"
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] mt-2 shrink-0" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
+                  )}
 
-                    <div className="flex flex-col gap-2">
-                      <h4 className="font-serif text-xl text-[var(--on-background)]">
-                        The Solution &amp; Impact
-                      </h4>
-                      <p className="font-sans text-[var(--on-surface-variant)] text-sm md:text-base leading-relaxed">
-                        Through a modular design system and editorial typography, we transformed the experience into an intuitive narrative, resulting in a dramatic increase in task completion speed and user satisfaction.
-                      </p>
+                  {/* Action Links */}
+                  {(selectedProject.githubUrl || selectedProject.liveUrl) && (
+                    <div className="mt-6 pt-6 border-t border-[var(--outline-variant)]/60 flex flex-wrap items-center gap-3">
+                      {selectedProject.githubUrl && (
+                        <a
+                          href={selectedProject.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--surface-container-low)] border border-[var(--outline-variant)] text-xs font-mono text-[var(--on-background)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors"
+                        >
+                          <span>Repository</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                      {selectedProject.liveUrl && selectedProject.liveUrl !== selectedProject.githubUrl && (
+                        <a
+                          href={selectedProject.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--primary)] text-[#FAF6F0] text-xs font-mono hover:opacity-90 transition-opacity"
+                        >
+                          <span>Live Demo</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                      )}
                     </div>
-                  </div>
+                  )}
                 </div>
               </motion.div>
             </div>

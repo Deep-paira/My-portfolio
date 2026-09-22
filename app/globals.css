@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght,wdth@100..900,25..151&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,6 +18,7 @@
     --on-primary-container: #FAF6F0;
     --primary-fixed-dim: #C4623F;
     --success: #2E7D47;
+    --text-pressure-color: #221E1C;
   }
 
   .dark {
@@ -31,6 +34,7 @@
     --on-primary-container: #1C1917;
     --primary-fixed-dim: #D97754;
     --success: #4ADE80;
+    --text-pressure-color: #FFFFFF;
   }
 
   body {
@@ -110,3 +114,35 @@
 .animate-shine {
   animation: shine 5s linear infinite;
 }
+
+/* 3D Kinetic Perspective & Anti-Gravity Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.font-pressure {
+  font-family: 'Roboto Flex', var(--font-sans), sans-serif;
+  font-optical-sizing: auto;
+}
+
+@keyframes float-antigravity {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.4deg);
+  }
+}
+
+.animate-antigravity {
+  animation: float-antigravity 6s ease-in-out infinite;
+}
+

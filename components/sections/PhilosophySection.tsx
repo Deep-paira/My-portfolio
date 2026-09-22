@@ -94,7 +94,11 @@ function PopWord({
   );
 }
 
-export function PhilosophySection() {
+interface PhilosophySectionProps {
+  activatedByHands?: boolean;
+}
+
+export function PhilosophySection({ activatedByHands = false }: PhilosophySectionProps) {
   const sectionRef = React.useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
@@ -104,7 +108,8 @@ export function PhilosophySection() {
     amount: 0.15,
   });
 
-  const isVisible = shouldReduceMotion || isInView;
+  // Activated EITHER by hands touching, OR by standard viewport intersection (failsafe), OR reduced motion
+  const isVisible = shouldReduceMotion || isInView || activatedByHands;
 
   // Exact manifesto words parsed into rhythmic stanzas with pop-up stagger delays
   const stanza1 = ["Great", "software", "is", "not", "the", "pursuit", "of", "novelty,"];

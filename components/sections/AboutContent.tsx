@@ -9,6 +9,7 @@ import { About3DDecor } from "../3d/About3DDecor";
 import { Sparkles, HeartHandshake, ArrowUpRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../ui/SocialIcons";
 import { motion, useReducedMotion } from "framer-motion";
+import { ResumeDownloadBlock } from "./ResumeDownloadBlock";
 
 const EDITORIAL_EASE = [0.23, 1, 0.32, 1] as const;
 
@@ -250,7 +251,10 @@ export function AboutContent() {
             </div>
           </motion.div>
 
-          {/* Social Links Row below image */}
+          {/* Unified Agency-Grade Downloadable Resume Action Hub */}
+          <ResumeDownloadBlock />
+
+          {/* Social Links Row below resume hub */}
           <div className="flex items-center gap-3 w-full max-w-md mx-auto lg:mx-0">
             <a
               href="https://github.com/Deep-paira"

@@ -79,11 +79,11 @@ export function CapabilitiesSection() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="relative w-full py-28 md:py-40 px-6 md:px-12 lg:px-20 border-b border-[var(--outline-variant)] bg-[var(--background)] overflow-hidden">
+    <section className="relative w-full pt-6 sm:pt-8 md:pt-10 pb-20 md:pb-28 px-6 md:px-12 lg:px-20 border-b border-[var(--outline-variant)] bg-[var(--background)] overflow-hidden" id="core-capabilities">
       <div className="mx-auto w-full max-w-7xl">
         
         {/* Editorial Section Index & Asymmetric Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 md:mb-28 gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-10 gap-8">
           <div className="max-w-2xl">
             <motion.div
               initial={shouldReduceMotion ? false : { opacity: 0, y: 15 }}

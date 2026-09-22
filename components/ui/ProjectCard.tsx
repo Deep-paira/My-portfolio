@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Project } from "@/types";
 import { Badge } from "./Badge";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, X } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -20,6 +20,8 @@ export function ProjectCard({ project }: { project: Project }) {
     }
   }, [isOpen]);
 
+  const bg = project.bgImage || project.imageUrl || project.image;
+
   return (
     <>
       <motion.div
@@ -32,22 +34,25 @@ export function ProjectCard({ project }: { project: Project }) {
       >
         <div className="absolute inset-0 z-0 border border-outline-variant/10 rounded-[12px] transition-colors duration-500 group-hover:border-primary/50 pointer-events-none"></div>
 
-        {project.imageUrl && (
-          <div className="absolute inset-x-0 top-0 h-2/3 z-0 overflow-hidden mix-blend-luminosity opacity-30 group-hover:opacity-70 group-hover:mix-blend-normal group-hover:scale-105 transition-all duration-700">
+        {bg && (
+          <div className="absolute inset-0 z-0 overflow-hidden">
             <Image 
-              src={project.imageUrl}
+              src={bg}
               alt={project.title}
               fill
-              className="object-cover"
+              className="object-cover object-center opacity-30 dark:opacity-20 transition-transform duration-700 ease-out group-hover:scale-105 group-hover:opacity-45 dark:group-hover:opacity-35"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--surface-container-low)]/70 to-[var(--surface-container-low)]"></div>
+            {/* Dark contrast overlay layer for high-contrast readable copy */}
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-[var(--surface-container-low)] via-[var(--surface-container-low)]/85 to-[var(--surface-container-low)]/40 pointer-events-none" />
           </div>
         )}
 
         <motion.div layoutId={`content-${project.id}`} className="relative z-10 flex flex-col h-full gap-4">
           <div className="flex justify-between items-start">
-            <motion.span layoutId={`year-${project.id}`} className="text-sm font-mono text-[var(--on-surface-variant)] tracking-widest">{project.year}</motion.span>
+            <motion.span layoutId={`year-${project.id}`} className="text-xs font-mono text-[var(--on-surface-variant)] tracking-widest uppercase">
+              {`${project.year || "2025"}${project.subtitle ? ` // ${project.subtitle}` : ""}`}
+            </motion.span>
           </div>
           
           <div className="mt-4">
@@ -85,10 +90,10 @@ export function ProjectCard({ project }: { project: Project }) {
                 className="w-full max-w-4xl max-h-[90vh] bg-[var(--surface-container-low)] rounded-[24px] p-8 md:p-16 overflow-y-auto pointer-events-auto flex flex-col relative shadow-2xl border border-outline-variant/15"
               >
                 {/* Modal Background Display */}
-                {project.imageUrl && (
+                {bg && (
                   <div className="absolute inset-0 z-0 h-[450px] opacity-20 pointer-events-none fade-in mask-radial rounded-t-[24px] overflow-hidden">
                     <Image 
-                      src={project.imageUrl}
+                      src={bg}
                       alt={project.title}
                       fill
                       className="object-cover object-top"
@@ -105,8 +110,12 @@ export function ProjectCard({ project }: { project: Project }) {
                 </button>
 
                 <motion.div layoutId={`content-${project.id}`} className="flex flex-col gap-6 max-w-3xl relative z-10">
-                  <motion.span layoutId={`year-${project.id}`} className="text-sm font-mono text-[var(--primary)] tracking-widest">{project.year}</motion.span>
-                  <motion.h3 layoutId={`title-${project.id}`} className="font-serif text-4xl md:text-5xl text-[var(--on-background)] leading-tight">{project.title}</motion.h3>
+                  <motion.span layoutId={`year-${project.id}`} className="text-sm font-mono text-[var(--primary)] tracking-widest uppercase">
+                    {`${project.year || "2025"} // ${project.subtitle || project.tagline || "CASE STUDY"}`}
+                  </motion.span>
+                  <motion.h3 layoutId={`title-${project.id}`} className="font-serif text-4xl md:text-5xl text-[var(--on-background)] leading-tight">
+                    {project.title}
+                  </motion.h3>
                   
                   <div className="flex flex-wrap gap-2 mt-2">
                     {project.tags.map((tag) => (
@@ -118,26 +127,53 @@ export function ProjectCard({ project }: { project: Project }) {
                     {project.description}
                   </motion.p>
                   
-                  {/* Expanded Content Details */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-                    className="mt-8 flex flex-col gap-10 border-t border-outline-variant/20 pt-10"
-                  >
-                    <div className="flex flex-col gap-4">
-                      <h4 className="font-serif text-[var(--on-background)] text-3xl">The Challenge</h4>
-                      <p className="font-sans text-[var(--on-surface-variant)] text-lg leading-relaxed">
-                        In this project, the core obstacle was simplifying a multifaceted platform without losing the inherent power tools required by professional users. We engaged in extensive qualitative research to isolate the crucial workflows.
-                      </p>
+                  {/* Expanded Content Details: Key Architecture & Highlights */}
+                  {project.features && project.features.length > 0 && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                      className="mt-8 flex flex-col gap-4 border-t border-outline-variant/20 pt-8"
+                    >
+                      <h4 className="font-serif text-[var(--on-background)] text-2xl">Key Architecture &amp; Highlights</h4>
+                      <ul className="space-y-3">
+                        {project.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start gap-3 font-sans text-base text-[var(--on-surface-variant)] leading-relaxed">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] mt-2 shrink-0" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+
+                  {/* Links */}
+                  {(project.githubUrl || project.liveUrl) && (
+                    <div className="mt-6 pt-6 border-t border-outline-variant/20 flex flex-wrap items-center gap-3">
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--surface-container-high)] border border-outline-variant/40 text-xs font-mono text-[var(--on-background)] hover:border-primary hover:text-primary transition-colors"
+                        >
+                          <span>Repository</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                      {project.liveUrl && project.liveUrl !== project.githubUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--primary-container)] text-[var(--on-primary-container)] text-xs font-mono hover:opacity-90 transition-opacity"
+                        >
+                          <span>Live Demo</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                      )}
                     </div>
-                    <div className="flex flex-col gap-4">
-                      <h4 className="font-serif text-[var(--on-background)] text-3xl">The Solution</h4>
-                      <p className="font-sans text-[var(--on-surface-variant)] text-lg leading-relaxed">
-                        By integrating a streamlined layout and focusing heavily on typography-driven hierarchy, the final deliverable resulted in an interface that guides the user intuitively, dramatically reducing cognitive load and lowering task completion time.
-                      </p>
-                    </div>
-                  </motion.div>
+                  )}
 
                 </motion.div>
               </motion.div>

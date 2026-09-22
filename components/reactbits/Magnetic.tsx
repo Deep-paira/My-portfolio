@@ -8,7 +8,7 @@ interface MagneticProps {
   intensity?: number; // 0.1 to 0.5
   className?: string;
 }
-
+ 
 export function Magnetic({
   children,
   intensity = 0.3,

@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import { AppLayout } from "@/components/layout/AppLayout";
 import { cn } from "@/lib/utils";
 
 const fraunces = Fraunces({ 
@@ -19,9 +18,9 @@ const manrope = Manrope({
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
+  subsets: ["latin"], 
   variable: "--font-mono",
-  display: "swap",
+  display: "swap", 
 });
 
 export const metadata: Metadata = {
@@ -36,16 +35,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(fraunces.variable, manrope.variable, jetbrainsMono.variable, "font-sans antialiased bg-background text-on-background min-h-screen flex flex-col")}>
+      <body
+        className={cn(
+          fraunces.variable,
+          manrope.variable,
+          jetbrainsMono.variable,
+          "font-sans antialiased bg-background text-on-background min-h-screen flex flex-col"
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem
         >
           <div className="fixed inset-0 z-[-1] noise-bg"></div>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <AppLayout>{children}</AppLayout>
         </ThemeProvider>
       </body>
     </html>

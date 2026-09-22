@@ -59,9 +59,9 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]",
+        "sticky top-0 z-40 w-full transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]",
         isScrolled
-          ? "h-16 bg-[var(--background)]/85 backdrop-blur-md border-b border-[var(--outline-variant)]/40 shadow-[0_4px_24px_rgba(0,0,0,0.03)]"
+          ? "h-16 bg-background/80 backdrop-blur-md border-b border-outline-variant/40 shadow-sm"
           : "h-20 bg-transparent border-b border-transparent"
       )}
     >

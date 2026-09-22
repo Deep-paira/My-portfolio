@@ -5,10 +5,17 @@ import { projects } from "@/data/projects";
 import { ProjectCard } from "../ui/ProjectCard";
 import { cn } from "@/lib/utils";
 
-const filters = ["ALL", "PRODUCT DESIGN", "DESIGN SYSTEMS", "MOBILE", "WEB", "BRANDING"];
+const filters = ["ALL", "REACT", "PYTHON", "TYPESCRIPT", "TAILWIND CSS", "DJANGO"];
 
 export function WorkGrid() {
   const [activeFilter, setActiveFilter] = React.useState("ALL");
+
+  const filteredProjects = React.useMemo(() => {
+    if (activeFilter === "ALL") return projects;
+    return projects.filter((p) =>
+      p.tags.some((tag) => tag.toUpperCase().includes(activeFilter))
+    );
+  }, [activeFilter]);
  
   return (
     <section className="w-full py-16 px-6 md:px-12 lg:px-24">
@@ -51,7 +58,7 @@ export function WorkGrid() {
 
         {/* Project Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-[minmax(350px,auto)]">
-          {projects.map((project) => (
+          {filteredProjects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
