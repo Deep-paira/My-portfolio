@@ -37,7 +37,7 @@ export default function Home() {
         <CapabilitiesSection />
 
         {/* Section 04: Engineering & Design Philosophy Manifesto */}
-        <PhilosophySection activatedByHands={handsTouched} />
+        <PhilosophySection />
 
         {/* Section 05: Selected Work Showcase */}
         <SelectedWorkSection />

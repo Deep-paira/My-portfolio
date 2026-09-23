@@ -99,17 +99,17 @@ interface PhilosophySectionProps {
 }
 
 export function PhilosophySection({ activatedByHands = false }: PhilosophySectionProps) {
-  const sectionRef = React.useRef<HTMLElement>(null);
+  const contentRef = React.useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
-  // Section-level intersection observer ensures unclipped reliable triggering
-  const isInView = useInView(sectionRef, {
+  // Content-level intersection observer ensures the text animation triggers reliably when scrolling up to this section
+  const isInView = useInView(contentRef, {
     once: true,
     amount: 0.15,
   });
 
-  // Activated EITHER by hands touching, OR by standard viewport intersection (failsafe), OR reduced motion
-  const isVisible = shouldReduceMotion || isInView || activatedByHands;
+  // Trigger text animation when scrolled into view or if user prefers reduced motion
+  const isVisible = Boolean(shouldReduceMotion) || isInView;
 
   // Exact manifesto words parsed into rhythmic stanzas with pop-up stagger delays
   const stanza1 = ["Great", "software", "is", "not", "the", "pursuit", "of", "novelty,"];
@@ -123,24 +123,28 @@ export function PhilosophySection({ activatedByHands = false }: PhilosophySectio
 
   return (
     <section
-      ref={sectionRef}
       className="relative w-full py-28 sm:py-36 md:py-44 px-6 md:px-12 lg:px-20 border-b border-[var(--outline-variant)] bg-[var(--background)] min-h-[500px] overflow-hidden"
     >
-      <div className="mx-auto w-full max-w-6xl relative z-10">
+      <div ref={contentRef} className="mx-auto w-full max-w-6xl relative z-10">
         
         {/* Editorial Section Index with Animated Hairline Accent */}
         <div className="flex flex-col gap-4 mb-16 md:mb-20">
-          <div className="flex items-center gap-3 text-xs sm:text-sm font-mono tracking-[0.25em] text-[var(--on-surface-variant)] uppercase">
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            transition={{ duration: 0.7, ease: LUXURY_EASE }}
+            className="flex items-center gap-3 text-xs sm:text-sm font-mono tracking-[0.25em] text-[var(--on-surface-variant)] uppercase"
+          >
             <span className="text-[var(--primary)] font-semibold text-sm sm:text-base">04</span>
             <span className="text-[var(--outline-variant)]">—</span>
             <span className="tracking-[0.2em]">DESIGN &amp; ENGINEERING MANIFESTO</span>
-          </div>
+          </motion.div>
 
           {/* Animated Hairline that draws in from left to right */}
           <motion.div
             initial={shouldReduceMotion ? false : { scaleX: 0 }}
             animate={isVisible ? { scaleX: 1 } : { scaleX: 0 }}
-            transition={{ duration: 0.9, ease: LUXURY_EASE }}
+            transition={{ duration: 0.9, delay: 0.1, ease: LUXURY_EASE }}
             className="w-full max-w-sm h-[1.5px] bg-gradient-to-r from-[var(--primary)] via-[var(--primary)]/50 to-transparent origin-left"
           />
         </div>
