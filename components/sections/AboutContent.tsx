@@ -229,13 +229,16 @@ export function AboutContent() {
             transition={{ duration: 0.85, ease: EDITORIAL_EASE }}
             className="group relative w-full aspect-[4/5] max-w-md mx-auto lg:mx-0"
           >
-            {/* Offset Terracotta Architectural Frame for physical depth */}
-            <div className="absolute -inset-2 sm:-inset-3 rounded-[32px] border border-[var(--primary)]/35 translate-x-3 translate-y-3 pointer-events-none transition-transform duration-500 group-hover:translate-x-4 group-hover:translate-y-4" />
+            {/* Soft Dark Neutral Gradient Backlight behind portrait */}
+            <div className="absolute -inset-4 rounded-[36px] bg-gradient-to-br from-[#1e1b18]/40 via-[#141210]/30 to-[#0a0908]/50 blur-xl pointer-events-none" />
+
+            {/* Offset Neutral Dark Architectural Frame for physical depth */}
+            <div className="absolute -inset-2 sm:-inset-3 rounded-[32px] border border-neutral-700/30 dark:border-white/10 translate-x-3 translate-y-3 pointer-events-none transition-transform duration-500 group-hover:translate-x-4 group-hover:translate-y-4" />
             
-            {/* Main Portrait Frame */}
-            <div className="relative w-full h-full overflow-hidden rounded-[28px] bg-[var(--surface-container-low)] border border-[var(--outline-variant)]/80 shadow-[0_16px_40px_rgba(0,0,0,0.06)] z-10">
+            {/* Main Portrait Frame with Dark Neutral Backdrop */}
+            <div className="relative w-full h-full overflow-hidden rounded-[28px] bg-gradient-to-b from-[#181614] to-[#0f0e0c] border border-neutral-800/80 dark:border-white/10 shadow-[0_20px_48px_rgba(0,0,0,0.4)] z-10">
               <Image 
-                src="/deep.jpeg" 
+                src="/deep-photo.jpg" 
                 alt="Deep Paira" 
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -243,10 +246,13 @@ export function AboutContent() {
                 priority
               />
 
+              {/* Gentle subtle bottom fade to anchor editorial badge */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
               {/* Discreet Editorial Tag Overlay */}
-              <div className="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between px-4 py-2.5 rounded-[12px] bg-[var(--background)]/85 backdrop-blur-md border border-[var(--outline-variant)]/60 text-xs font-mono">
-                <span className="text-[var(--on-background)] font-medium">Deep Paira</span>
-                <span className="text-[var(--primary)] uppercase tracking-wider text-[10px]">Developer</span>
+              <div className="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between px-4 py-2.5 rounded-[12px] bg-[#0d0c0b]/85 backdrop-blur-md border border-white/10 text-xs font-mono">
+                <span className="text-white font-medium">Deep Paira</span>
+                <span className="text-neutral-400 uppercase tracking-wider text-[10px]">Developer</span>
               </div>
             </div>
           </motion.div>

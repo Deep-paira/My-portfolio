@@ -7,8 +7,8 @@ import { motion, useReducedMotion } from "framer-motion";
 const LUXURY_EASE = [0.16, 1, 0.3, 1] as const;
 
 // Lazy-load the 3D scene (SSR disabled) with lightweight skeleton to ensure CLS = 0
-const CodeToInterfaceScene = dynamic(
-  () => import("../3d/CodeToInterfaceScene"),
+const PaperScrunchHeroWrapper = dynamic(
+  () => import("../3d/PaperScrunchHeroWrapper"),
   {
     ssr: false,
     loading: () => (
@@ -54,9 +54,8 @@ export function ModelSection() {
         <div className="absolute inset-0 bg-radial from-[#06B6D4]/5 via-transparent to-transparent pointer-events-none" />
         <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 max-w-2xl h-24 bg-[var(--primary)]/10 rounded-full blur-3xl pointer-events-none" />
 
-        {/* High-Performance WebGL Scene */}
         <div className="relative w-full h-full">
-          <CodeToInterfaceScene shouldReduceMotion={Boolean(shouldReduceMotion)} />
+          <PaperScrunchHeroWrapper shouldReduceMotion={Boolean(shouldReduceMotion)} />
         </div>
 
         {/* Corner HUD Coordinates */}

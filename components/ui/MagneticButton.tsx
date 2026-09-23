@@ -4,6 +4,7 @@ import * as React from "react";
 import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { scrollToTarget } from "@/components/providers/SmoothScroll";
 
 interface MagneticButtonProps {
   children: React.ReactNode;
@@ -48,6 +49,17 @@ export function MagneticButton({
     y.set(0);
   };
 
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    if (href && href.startsWith("#")) {
+      e.preventDefault();
+      scrollToTarget(href, { offset: -70, duration: 1.4 });
+      if (typeof window !== "undefined" && window.history) {
+        window.history.pushState(null, "", href);
+      }
+    }
+    onClick?.();
+  };
+
   const baseStyles = cn(
     "group relative inline-flex items-center justify-center font-sans text-xs uppercase tracking-[0.14em] font-medium transition-all duration-300 select-none",
     variant === "nav" &&
@@ -66,7 +78,7 @@ export function MagneticButton({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={baseStyles}
-      onClick={onClick}
+      onClick={!href ? handleClick : undefined}
     >
       {children}
     </motion.div>
@@ -74,7 +86,7 @@ export function MagneticButton({
 
   if (href) {
     return (
-      <Link href={href} className="inline-block">
+      <Link href={href} onClick={handleClick} className="inline-block">
         {content}
       </Link>
     );

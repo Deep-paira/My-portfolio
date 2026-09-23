@@ -8,7 +8,7 @@ import { ArrowDown } from "lucide-react";
 const LUXURY_EASE = [0.16, 1, 0.3, 1] as const;
 
 // Lazy-load the 3D scene (SSR disabled)
-const CodeToInterfaceScene = dynamic(() => import("../3d/CodeToInterfaceScene"), {
+const PaperScrunchHeroWrapper = dynamic(() => import("../3d/PaperScrunchHeroWrapper"), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center">
@@ -59,7 +59,7 @@ export function TopHeroSection() {
           transition={{ duration: 1.1, delay: 0.35, ease: LUXURY_EASE }}
           className="relative w-[320px] sm:w-[400px] md:w-[460px] aspect-square flex items-center justify-center my-2 sm:my-4"
         >
-          <CodeToInterfaceScene shouldReduceMotion={Boolean(shouldReduceMotion)} />
+          <PaperScrunchHeroWrapper shouldReduceMotion={Boolean(shouldReduceMotion)} />
 
           {/* Contact Grounding Glow */}
           <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-48 sm:w-60 h-6 bg-[var(--primary)]/15 rounded-full blur-xl pointer-events-none" />

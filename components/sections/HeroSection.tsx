@@ -13,14 +13,17 @@ import { GithubIcon, LinkedinIcon } from "../ui/SocialIcons";
 
 const LUXURY_EASE = [0.16, 1, 0.3, 1] as const;
 
-// Lazy-load the 3D model canvas in top-right quadrant (SSR disabled, CLS = 0)
-const CodeToInterfaceScene = dynamic(
-  () => import("../3d/CodeToInterfaceScene"),
+// Lazy-load the hand-tracked low-poly paper scrunch portrait (SSR disabled, CLS = 0)
+const PaperScrunchHeroWrapper = dynamic(
+  () => import("../3d/PaperScrunchHeroWrapper"),
   {
     ssr: false,
     loading: () => (
-      <div className="w-full h-full flex items-center justify-center">
+      <div className="w-full h-full flex flex-col items-center justify-center gap-3">
         <div className="w-48 h-48 rounded-full bg-[#06B6D4]/10 blur-3xl animate-pulse" />
+        <span className="font-mono text-xs uppercase tracking-widest text-[var(--on-surface-variant)]/70">
+          Synthesizing paper facets...
+        </span>
       </div>
     ),
   }
@@ -189,17 +192,9 @@ export function HeroSection() {
           <div className="absolute inset-0 bg-radial from-[#38BDF8]/10 via-transparent to-transparent pointer-events-none rounded-3xl" />
           <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-48 sm:w-60 h-10 bg-[var(--primary)]/15 rounded-full blur-2xl pointer-events-none" />
 
-          {/* 3D Synthesis Canvas */}
+          {/* Hand-Tracked Low-Poly Paper Scrunch Canvas */}
           <div className="relative w-full h-full">
-            <CodeToInterfaceScene shouldReduceMotion={Boolean(shouldReduceMotion)} />
-          </div>
-
-          {/* Editorial Quadrant HUD Indicator */}
-          <div className="absolute top-2 right-4 font-mono text-[9px] text-[var(--on-surface-variant)]/60 tracking-widest hidden sm:block">
-            QUADRANT: TOP-RIGHT // INERTIA ACTIVE
-          </div>
-          <div className="absolute bottom-2 right-4 font-mono text-[9px] text-[#38BDF8] tracking-widest hidden sm:block">
-            50% WIREFRAME // 50% TACTILE CLAY
+            <PaperScrunchHeroWrapper shouldReduceMotion={Boolean(shouldReduceMotion)} />
           </div>
         </motion.div>
 
