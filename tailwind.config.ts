@@ -27,6 +27,7 @@ const config: Config = {
         serif: ["var(--font-heading)", "serif"],
         sans: ["var(--font-sans)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
+        thunder: ["Thunder", "Bebas Neue", "sans-serif"],
       },
       transitionTimingFunction: {
         'custom-quintic': 'cubic-bezier(0.23, 1, 0.32, 1)',

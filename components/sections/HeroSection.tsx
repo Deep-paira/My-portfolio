@@ -4,10 +4,9 @@ import * as React from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDownRight, ArrowRight, Sparkles, Terminal, Layers } from "lucide-react";
+import { ArrowDownRight, ArrowRight } from "lucide-react";
 import { MaskedHeading } from "../ui/MaskedHeading";
 import { BlurText } from "../ui/BlurText";
-import { ThreeDTextReveal } from "../ui/ThreeDTextReveal";
 import { MagneticButton } from "../ui/MagneticButton";
 import { GithubIcon, LinkedinIcon } from "../ui/SocialIcons";
 
@@ -31,7 +30,7 @@ const PaperScrunchHeroWrapper = dynamic(
 
 /**
  * HeroSection (Split-Grid Asymmetrical Layout)
- * Left column (lg:col-span-7): Refined headline, MaskedHeading, BlurText, ThreeDTextReveal, CTAs.
+ * Left column (lg:col-span-7): Refined headline, MaskedHeading, BlurText, Core Capabilities Grid, CTAs.
  * Right column (lg:col-span-5): Anchored 3D canvas viewport (top-right hero alignment).
  */
 export function HeroSection() {
@@ -88,56 +87,11 @@ export function HeroSection() {
             />
           </div>
 
-          {/* React Bits Pro 3D-Text-Reveal: Key Value Callouts */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-2xl pt-1">
-            <ThreeDTextReveal delay={0.15} rotationX={-65}>
-              <div className="p-3 rounded-xl bg-[var(--surface-container-low)]/70 border border-[var(--outline-variant)]/60 flex items-center gap-2.5">
-                <Terminal className="w-3.5 h-3.5 text-[#06B6D4] shrink-0" />
-                <div>
-                  <span className="block text-[9px] font-mono tracking-widest uppercase text-[var(--on-surface-variant)]/70">
-                    ARCHITECTURE
-                  </span>
-                  <span className="font-mono text-[11px] font-semibold text-[var(--on-background)] tracking-wide">
-                    Next.js &amp; Django
-                  </span>
-                </div>
-              </div>
-            </ThreeDTextReveal>
-
-            <ThreeDTextReveal delay={0.25} rotationX={-65}>
-              <div className="p-3 rounded-xl bg-[var(--surface-container-low)]/70 border border-[var(--outline-variant)]/60 flex items-center gap-2.5">
-                <Layers className="w-3.5 h-3.5 text-[var(--primary)] shrink-0" />
-                <div>
-                  <span className="block text-[9px] font-mono tracking-widest uppercase text-[var(--on-surface-variant)]/70">
-                    SYSTEMS
-                  </span>
-                  <span className="font-mono text-[11px] font-semibold text-[var(--on-background)] tracking-wide">
-                    Tokens &amp; Tailwind
-                  </span>
-                </div>
-              </div>
-            </ThreeDTextReveal>
-
-            <ThreeDTextReveal delay={0.35} rotationX={-65}>
-              <div className="p-3 rounded-xl bg-[var(--surface-container-low)]/70 border border-[var(--outline-variant)]/60 flex items-center gap-2.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
-                <div>
-                  <span className="block text-[9px] font-mono tracking-widest uppercase text-[var(--on-surface-variant)]/70">
-                    MOTION
-                  </span>
-                  <span className="font-mono text-[11px] font-semibold text-[var(--on-background)] tracking-wide">
-                    Three.js &amp; Framer
-                  </span>
-                </div>
-              </div>
-            </ThreeDTextReveal>
-          </div>
-
           {/* CTA Pair + Social Icons */}
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.45, ease: LUXURY_EASE }}
+            transition={{ duration: 0.8, delay: 0.2, ease: LUXURY_EASE }}
             className="flex flex-col sm:flex-row items-start sm:items-center gap-5 pt-2"
           >
             <MagneticButton

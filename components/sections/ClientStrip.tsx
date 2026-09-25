@@ -13,6 +13,8 @@ import {
   Cpu,
   Palette,
 } from "lucide-react";
+import { ProgressiveBlur } from "../ui/ProgressiveBlur";
+import { TechStackSpotlight } from "../ui/TechStackSpotlight";
 
 interface SkillItem {
   name: string;
@@ -60,80 +62,103 @@ export function ClientStrip({ className }: { className?: string }) {
       transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
       viewport={{ once: true }}
       className={cn(
-        "w-full border-b border-[var(--outline-variant)] relative overflow-hidden py-12 md:py-16 bg-[var(--surface-container-low)]/40",
+        "w-full border-b border-[var(--outline-variant)] relative overflow-hidden py-14 md:py-20 bg-[var(--surface-container-low)]/40",
         className
       )}
     >
-      {/* Editorial Section Index */}
-      <div className="mx-auto max-w-7xl px-6 md:px-12 mb-8 flex items-center justify-between text-xs font-mono tracking-[0.2em] text-[var(--on-surface-variant)] uppercase">
-        <div className="flex items-center gap-2.5">
-          <span className="text-[var(--primary)] font-medium">02</span>
-          <span className="text-[var(--outline-variant)]">—</span>
-          <span>TECH STACK &amp; MEDIUMS</span>
-        </div>
-        <span className="hidden sm:inline-block opacity-60">
-          FRONTEND // BACKEND // 3D &amp; CLOUD
-        </span>
-      </div>
+      {/* Progressive Blur (Adapted from Skiper UI Skiper 41) for soft edge transitions */}
+      <ProgressiveBlur
+        position="top"
+        height="64px"
+        blurAmount="6px"
+        backgroundColor="var(--background)"
+      />
+      <ProgressiveBlur
+        position="bottom"
+        height="64px"
+        blurAmount="6px"
+        backgroundColor="var(--background)"
+      />
 
-      {/* Dual Row Showcase with Edge Fade Mask */}
-      <div
-        className="relative w-full flex flex-col gap-4 overflow-hidden group"
-        style={{
-          maskImage:
-            "linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%)",
-        }}
-      >
-        {/* ROW 1: Slides Left-to-Right */}
-        <div className="marquee-track marquee-row-1 group-hover:[animation-play-state:paused] will-change-transform py-1">
-          {row1Tripled.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={`row1-${item.name}-${index}`}
-                className="flex items-center gap-2.5 px-4 py-2.5 rounded-[12px] bg-[var(--background)] border border-[var(--outline-variant)]/70 shadow-sm text-[13px] font-sans text-[var(--on-background)] whitespace-nowrap select-none transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:border-[var(--primary)] hover:shadow-md cursor-default"
-              >
-                <div
-                  className="w-6 h-6 rounded-[8px] flex items-center justify-center bg-[var(--surface-container-high)] text-[var(--primary)]"
-                  style={{ color: item.color }}
-                >
-                  <Icon className="w-3.5 h-3.5" />
-                </div>
-                <span className="font-medium tracking-tight">{item.name}</span>
-                <span className="text-[10px] font-mono text-[var(--on-surface-variant)] uppercase opacity-60 ml-0.5">
-                  / {item.category}
-                </span>
-              </div>
-            );
-          })}
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
+        {/* Editorial Section Index */}
+        <div className="mb-8 flex items-center justify-between text-xs font-mono tracking-[0.2em] text-[var(--on-surface-variant)] uppercase">
+          <div className="flex items-center gap-2.5">
+            <span className="text-[var(--primary)] font-medium">02</span>
+            <span className="text-[var(--outline-variant)]">—</span>
+            <span>TECH STACK &amp; MEDIUMS</span>
+          </div>
+          <span className="hidden sm:inline-block opacity-60">
+            FRONTEND // BACKEND // 3D &amp; CLOUD
+          </span>
         </div>
 
-        {/* ROW 2: Slides Right-to-Left (Opposite Direction) */}
-        <div className="marquee-track marquee-row-2 group-hover:[animation-play-state:paused] will-change-transform py-1">
-          {row2Tripled.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={`row2-${item.name}-${index}`}
-                className="flex items-center gap-2.5 px-4 py-2.5 rounded-[12px] bg-[var(--background)] border border-[var(--outline-variant)]/70 shadow-sm text-[13px] font-sans text-[var(--on-background)] whitespace-nowrap select-none transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:border-[var(--primary)] hover:shadow-md cursor-default"
-              >
+        {/* Dual Row Infinite Marquee with Edge Fade Mask */}
+        <div
+          className="relative w-full flex flex-col gap-4 overflow-hidden group pb-2"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%)",
+          }}
+        >
+          {/* ROW 1: Slides Left-to-Right */}
+          <div className="marquee-track marquee-row-1 group-hover:[animation-play-state:paused] will-change-transform py-1">
+            {row1Tripled.map((item, index) => {
+              const Icon = item.icon;
+              return (
                 <div
-                  className="w-6 h-6 rounded-[8px] flex items-center justify-center bg-[var(--surface-container-high)] text-[var(--primary)]"
-                  style={{ color: item.color }}
+                  key={`row1-${item.name}-${index}`}
+                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-[12px] bg-[var(--background)] border border-[var(--outline-variant)]/70 shadow-sm text-[13px] font-sans text-[var(--on-background)] whitespace-nowrap select-none transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:border-[var(--primary)] hover:shadow-md cursor-default"
                 >
-                  <Icon className="w-3.5 h-3.5" />
+                  <div
+                    className="w-6 h-6 rounded-[8px] flex items-center justify-center bg-[var(--surface-container-high)] text-[var(--primary)]"
+                    style={{ color: item.color }}
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                  </div>
+                  <span className="font-medium tracking-tight">{item.name}</span>
+                  <span className="text-[10px] font-mono text-[var(--on-surface-variant)] uppercase opacity-60 ml-0.5">
+                    / {item.category}
+                  </span>
                 </div>
-                <span className="font-medium tracking-tight">{item.name}</span>
-                <span className="text-[10px] font-mono text-[var(--on-surface-variant)] uppercase opacity-60 ml-0.5">
-                  / {item.category}
-                </span>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
+          {/* ROW 2: Slides Right-to-Left (Opposite Direction) */}
+          <div className="marquee-track marquee-row-2 group-hover:[animation-play-state:paused] will-change-transform py-1">
+            {row2Tripled.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={`row2-${item.name}-${index}`}
+                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-[12px] bg-[var(--background)] border border-[var(--outline-variant)]/70 shadow-sm text-[13px] font-sans text-[var(--on-background)] whitespace-nowrap select-none transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:border-[var(--primary)] hover:shadow-md cursor-default"
+                >
+                  <div
+                    className="w-6 h-6 rounded-[8px] flex items-center justify-center bg-[var(--surface-container-high)] text-[var(--primary)]"
+                    style={{ color: item.color }}
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                  </div>
+                  <span className="font-medium tracking-tight">{item.name}</span>
+                  <span className="text-[10px] font-mono text-[var(--on-surface-variant)] uppercase opacity-60 ml-0.5">
+                    / {item.category}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Interactive Discipline Spotlight (Adapted from Skiper UI Skiper 6 "Hover members") */}
+        <div className="mt-12 sm:mt-16">
+          <TechStackSpotlight />
         </div>
       </div>
     </motion.section>
   );
 }
+
+export default ClientStrip;

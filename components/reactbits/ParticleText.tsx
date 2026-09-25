@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback, useState } from "react";
 
 interface ParticleTextProps {
   text?: string;
@@ -40,6 +40,10 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
   const progressRef = useRef<number>(0);
   const targetProgressRef = useRef<number>(0);
   const isVisibleRef = useRef<boolean>(true);
+  const retryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const retryCountRef = useRef<number>(0);
+  const [isReady, setIsReady] = useState(false);
+
   const mouseRef = useRef<{ x: number; y: number; active: boolean }>({
     x: -9999,
     y: -9999,
@@ -84,14 +88,32 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
   }, []);
 
   // Initialize and sample particles from offscreen canvas
-  const initParticles = useCallback(() => {
+  const initParticles = useCallback(async () => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
 
+    // 1. Wait for document fonts to be ready before rasterizing text into particles
+    if (typeof document !== "undefined" && "fonts" in document) {
+      try {
+        await document.fonts.ready;
+        // Specifically ensure the 800 weight of Manrope is requested/ready
+        await Promise.race([
+          document.fonts.load('800 48px "Manrope"'),
+          new Promise((resolve) => setTimeout(resolve, 800)),
+        ]);
+      } catch {
+        // Continue even if font loading API times out
+      }
+    }
+
+    // Verify container and canvas are still mounted after async wait
+    if (!canvasRef.current || !containerRef.current) return;
+
     const rect = container.getBoundingClientRect();
     const dpr = typeof window !== "undefined" ? Math.min(window.devicePixelRatio || 1, 2) : 1;
-    const width = Math.max(rect.width, 300);
+    const measuredWidth = rect.width > 0 ? rect.width : container.clientWidth;
+    const width = Math.max(measuredWidth, 300);
     const height = Math.min(Math.max(width * 0.28, 120), 190);
 
     canvas.width = width * dpr;
@@ -125,7 +147,7 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
 
     // Measure total width considering individual character glyphs & spaces
     const measureTextWidth = (size: number) => {
-      offCtx.font = `900 ${size}px "Manrope", system-ui, -apple-system, sans-serif`;
+      offCtx.font = `800 ${size}px "Manrope", system-ui, -apple-system, sans-serif`;
       let total = 0;
       for (let i = 0; i < characters.length; i++) {
         const char = characters[i];
@@ -143,7 +165,7 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
       calculatedWidth = measureTextWidth(fontSize);
     }
 
-    offCtx.font = `900 ${fontSize}px "Manrope", system-ui, -apple-system, sans-serif`;
+    offCtx.font = `800 ${fontSize}px "Manrope", system-ui, -apple-system, sans-serif`;
 
     // Render characters with precise horizontal centering
     let cursorX = (width - calculatedWidth) / 2;
@@ -191,13 +213,53 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
       }
     }
 
+    // 2. CRITICAL COLD-CACHE GUARD: If 0 particles were sampled (canvas blank due to active font download or layout zero-size):
+    if (newParticles.length === 0) {
+      if (retryCountRef.current < 8) {
+        retryCountRef.current += 1;
+        if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
+        retryTimeoutRef.current = setTimeout(() => {
+          initParticles();
+        }, 120);
+      }
+      return;
+    }
+
     particlesRef.current = newParticles;
+    setIsReady(true);
+    retryCountRef.current = 0;
   }, [text, particleDensity, particleSize]);
 
   // Main animation frame loop
   useEffect(() => {
     initParticles();
     updateScrollProgress();
+
+    // 3. Listen to document.fonts.ready and loadingdone for delayed font arrivals
+    let fontLoadHandler: (() => void) | null = null;
+    if (typeof document !== "undefined" && "fonts" in document) {
+      fontLoadHandler = () => {
+        initParticles();
+      };
+      document.fonts.ready.then(() => {
+        initParticles();
+      });
+      document.fonts.addEventListener("loadingdone", fontLoadHandler);
+    }
+
+    // 4. ResizeObserver ensures particles re-sample whenever container dimensions stabilize
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined" && containerRef.current) {
+      resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.contentRect.width > 0) {
+            initParticles();
+            updateScrollProgress();
+          }
+        }
+      });
+      resizeObserver.observe(containerRef.current);
+    }
 
     const handleResize = () => {
       initParticles();
@@ -303,6 +365,11 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
 
     return () => {
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+      if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
+      if (fontLoadHandler && typeof document !== "undefined" && "fonts" in document) {
+        document.fonts.removeEventListener("loadingdone", fontLoadHandler);
+      }
+      if (resizeObserver) resizeObserver.disconnect();
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
       observer.disconnect();
@@ -328,11 +395,25 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
       ref={containerRef}
       className={`relative w-full flex items-center justify-center select-none ${className}`}
     >
+      {/* Graceful lightweight loading state while fonts initialize on cold cache */}
+      {!isReady && (
+        <div
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          aria-hidden="true"
+        >
+          <span className="font-mono text-sm sm:text-base uppercase tracking-[0.25em] text-[var(--on-surface-variant)]/25 animate-pulse select-none">
+            {text}
+          </span>
+        </div>
+      )}
+
       <canvas
         ref={canvasRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="block max-w-full pointer-events-auto"
+        className={`block max-w-full pointer-events-auto transition-opacity duration-500 ${
+          isReady ? "opacity-100" : "opacity-0"
+        }`}
         aria-label={text}
         role="img"
       />

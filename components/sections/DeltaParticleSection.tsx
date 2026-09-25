@@ -1,7 +1,22 @@
 "use client";
 
 import React from "react";
-import ParticleText from "@/components/reactbits/ParticleText";
+import dynamic from "next/dynamic";
+
+// Dynamic client import with ssr: false ensures browser-only canvas execution and no hydration mismatch
+const ParticleText = dynamic(
+  () => import("@/components/reactbits/ParticleText"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full flex items-center justify-center py-6">
+        <span className="font-mono text-sm sm:text-base uppercase tracking-[0.25em] text-[var(--on-surface-variant)]/25 animate-pulse select-none">
+          D E L T A
+        </span>
+      </div>
+    ),
+  }
+);
 
 export const DeltaParticleSection: React.FC = () => {
   return (

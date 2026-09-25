@@ -9,6 +9,7 @@ import { AvailabilityBadge } from "../ui/AvailabilityBadge";
 import { MagneticButton } from "../ui/MagneticButton";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
+import { ProgressiveBlur } from "../ui/ProgressiveBlur";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -59,12 +60,22 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]",
+        "sticky top-0 z-40 w-full transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] relative",
         isScrolled
           ? "h-16 bg-background/80 backdrop-blur-md border-b border-outline-variant/40 shadow-sm"
           : "h-20 bg-transparent border-b border-transparent"
       )}
     >
+      {/* Progressive Blur (Adapted from Skiper UI Skiper 41) for seamless scroll transition */}
+      {isScrolled && (
+        <ProgressiveBlur
+          position="bottom"
+          height="28px"
+          blurAmount="4px"
+          backgroundColor="var(--background)"
+          className="top-full -bottom-auto pointer-events-none"
+        />
+      )}
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6 md:px-12 lg:px-16">
         
         {/* Logo with tasteful editorial hover interaction */}
