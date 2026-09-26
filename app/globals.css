@@ -124,7 +124,7 @@
   animation: shine 5s linear infinite;
 }
 
-/* 3D Kinetic Perspective & Anti-Gravity Utilities */
+/* 3D Kinetic Perspective & Float Utilities */
 .perspective-1000 {
   perspective: 1000px;
 }
@@ -142,7 +142,7 @@
   font-optical-sizing: auto;
 }
 
-@keyframes float-antigravity {
+@keyframes float-subtle {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
   }
@@ -151,7 +151,7 @@
   }
 }
 
-.animate-antigravity {
-  animation: float-antigravity 6s ease-in-out infinite;
+.animate-float-subtle {
+  animation: float-subtle 6s ease-in-out infinite;
 }
 

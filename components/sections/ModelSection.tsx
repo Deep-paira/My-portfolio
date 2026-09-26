@@ -21,8 +21,8 @@ const PaperScrunchHeroWrapper = dynamic(
 
 /**
  * ModelSection
- * Widened 3D viewport giving the anti-gravity synthesis model horizontal dominance (w-full max-w-7xl / w-[92vw]),
- * featuring smooth mouse tracking inertia, dual-axis anti-gravity float, and zero layout shift.
+ * Widened 3D viewport giving the interactive paper model horizontal dominance (w-full max-w-7xl / w-[92vw]),
+ * featuring smooth mouse tracking inertia, dual-axis float, and zero layout shift.
  */
 export function ModelSection() {
   const shouldReduceMotion = useReducedMotion();
@@ -35,7 +35,7 @@ export function ModelSection() {
         <div className="flex items-center gap-3">
           <span className="text-[#06B6D4] font-semibold">01</span>
           <span className="text-[var(--outline-variant)]">—</span>
-          <span>ANTI-GRAVITY SYNTHESIS</span>
+          <span>3D PERSPECTIVE VIEWPORT</span>
         </div>
         <div className="hidden sm:flex items-center gap-3 text-[10px] text-[var(--on-surface-variant)]/70">
           <span>[ 3D PERSPECTIVE VIEWPORT // INTERACTIVE INERTIA ]</span>
@@ -50,7 +50,7 @@ export function ModelSection() {
         transition={{ duration: 1.0, ease: LUXURY_EASE }}
         className="relative w-full max-w-7xl lg:w-[92vw] mx-auto h-[420px] sm:h-[520px] md:h-[600px] lg:h-[650px] rounded-3xl bg-[var(--surface-container-low)]/40 border border-[var(--outline-variant)]/60 shadow-inner flex items-center justify-center overflow-hidden"
       >
-        {/* Subtle Anti-Gravity Ambient Backlighting */}
+        {/* Subtle Ambient Backlighting */}
         <div className="absolute inset-0 bg-radial from-[#06B6D4]/5 via-transparent to-transparent pointer-events-none" />
         <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 max-w-2xl h-24 bg-[var(--primary)]/10 rounded-full blur-3xl pointer-events-none" />
 

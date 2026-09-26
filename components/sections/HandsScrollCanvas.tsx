@@ -249,7 +249,7 @@ export function HandsScrollCanvas({
               />
             )}
 
-            {/* Glowing Anti-Gravity Contact Halo */}
+            {/* Glowing Contact Halo */}
             <div
               className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-gradient-to-r from-[#38BDF8]/20 to-[var(--primary)]/20 blur-3xl transition-all duration-500 pointer-events-none ${
                 isReached ? "opacity-100 scale-125" : "opacity-0 scale-50"

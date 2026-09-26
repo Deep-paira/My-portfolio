@@ -65,7 +65,7 @@ export function TopHeroSection() {
           <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-48 sm:w-60 h-6 bg-[var(--primary)]/15 rounded-full blur-xl pointer-events-none" />
         </motion.div>
 
-        {/* Subtle Supporting Caption Explaining the 3D Synthesis */}
+        {/* Subtle Supporting Caption Explaining the 3D Transformation */}
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}

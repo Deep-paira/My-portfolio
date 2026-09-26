@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
  * ResumeDownloadBlock
  * Modern, cardless dual-action resume hub embedded directly into the editorial flow.
  * Features a high-contrast pill download button, live ATS/metadata badge with ping indicator,
- * ghost link for in-browser viewing, and an anti-gravity floating "peek" document preview on desktop hover.
+ * ghost link for in-browser viewing, and a floating "peek" document preview on desktop hover.
  */
 export function ResumeDownloadBlock({ className }) {
   const shouldReduceMotion = useReducedMotion();
@@ -23,7 +23,7 @@ export function ResumeDownloadBlock({ className }) {
         {/* Primary Action: Download Resume Pill with Peek Hover Thumbnail */}
         <div className="relative group flex-1">
           
-          {/* Anti-Gravity Peek Document Preview Thumbnail (Desktop Only) */}
+          {/* Floating Peek Document Preview Thumbnail (Desktop Only) */}
           {!shouldReduceMotion && (
             <motion.div
               className="hidden sm:block absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-52 p-3.5 rounded-[14px] bg-[#0c0c0e] border border-white/15 shadow-[0_20px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl opacity-0 group-hover:opacity-100 group-hover:scale-100 scale-95 pointer-events-none transition-all duration-300 origin-bottom z-30"

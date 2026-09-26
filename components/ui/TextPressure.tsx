@@ -22,7 +22,7 @@ interface TextPressureProps {
 /**
  * TextPressure (React Bits text-animations/text-pressure)
  * Interactive variable font component reacting to cursor proximity with spring physics,
- * dynamically deforming font weight (wght) and width (wdth) axes with an anti-gravity floating idle state.
+ * dynamically deforming font weight (wght) and width (wdth) axes with a gentle floating idle state.
  */
 export function TextPressure({
   text = "DELTA",

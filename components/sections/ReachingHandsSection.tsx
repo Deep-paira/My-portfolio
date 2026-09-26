@@ -77,7 +77,7 @@ export function ReachingHandsSection({ onHandsTouch }: ReachingHandsSectionProps
           <div className="flex items-center gap-3 text-xs font-mono tracking-[0.25em] text-[var(--on-surface-variant)] uppercase">
             <span className="text-[var(--primary)] font-semibold">03.5</span>
             <span className="text-[var(--outline-variant)]">—</span>
-            <span className="tracking-[0.2em]">DIGITAL SYNTHESIS</span>
+            <span className="tracking-[0.2em]">KINETIC INTERACTION</span>
           </div>
 
           <div className="hidden sm:flex items-center gap-2 font-mono text-[10px] tracking-widest text-[var(--on-surface-variant)] uppercase">

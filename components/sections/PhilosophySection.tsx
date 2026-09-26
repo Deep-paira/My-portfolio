@@ -194,7 +194,7 @@ export function PhilosophySection({ activatedByHands = false }: PhilosophySectio
               ))}
             </div>
 
-            {/* Stanza 3: Tactile synthesis (Subtle indent + Grounded in clarity underline) */}
+            {/* Stanza 3: Tactile interaction (Subtle indent + Grounded in clarity underline) */}
             <div className="pl-2 sm:pl-5 md:pl-7 py-1 overflow-visible flex flex-col gap-1.5 sm:gap-2">
               <div>
                 {stanza3Line1.map((word, i) => (

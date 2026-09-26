@@ -14,7 +14,7 @@ interface MaskedHeadingProps {
 
 /**
  * MaskedHeading (React Bits text-animations/masked-heading)
- * Renders high-impact heading typography with an anti-gravity moving gradient mask,
+ * Renders high-impact heading typography with a smooth dynamic moving gradient mask,
  * transitioning from deep indigo to luminous metallic cyan and crisp platinum highlights.
  */
 export function MaskedHeading({

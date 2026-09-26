@@ -43,24 +43,6 @@ export function HeroSection() {
         
         {/* Left Column: Typography, React Bits Animations & Value Propositions (lg:col-span-7) */}
         <div className="lg:col-span-7 flex flex-col items-start gap-6 sm:gap-7 z-10">
-          
-          {/* Top Editorial Tagline */}
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.08, ease: LUXURY_EASE }}
-            className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-[var(--surface-container-low)]/80 border border-[var(--outline-variant)]/80 shadow-xs"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#06B6D4] animate-pulse" />
-            <span className="font-mono text-xs uppercase tracking-[0.2em] font-semibold text-[var(--on-surface-variant)]">
-              ANTI-GRAVITY // DESIGN &amp; CODE SYNTHESIS
-            </span>
-            <span className="text-[var(--outline-variant)] font-mono text-xs">—</span>
-            <span className="font-mono text-[11px] uppercase tracking-wider text-[var(--primary)] font-medium">
-              DEEP PAIRA
-            </span>
-          </motion.div>
-
           {/* Scaled-down Refined Headline (editorial poise, no crowding) */}
           <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight text-[var(--on-background)] leading-[1.15] max-w-2xl">
             Architecting scalable systems,{" "}
