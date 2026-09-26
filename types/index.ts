@@ -3,6 +3,7 @@ export interface Project {
   title: string;
   subtitle?: string;
   tagline?: string;
+  quote?: string;
   description: string;
   features?: string[];
   tags: string[];
@@ -12,6 +13,7 @@ export interface Project {
   bgImage?: string;
   imageUrl?: string;
   image?: string;
+  secondaryImage?: string;
   githubUrl?: string;
   liveUrl?: string;
 }

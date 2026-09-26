@@ -56,23 +56,22 @@ export const projects: Project[] = [
   {
     id: "prooftrail",
     title: "ProofTrail",
-    subtitle: "Verifiable Skill Passport & Matching Engine",
-    tagline: "Verifiable Skill Passport & Matching Engine",
+    subtitle: "Verifiable Skill Passport Platform",
+    tagline: "Every claim on your passport traces back to real, verified evidence.",
+    quote: "Every claim on your passport traces back to real, verified evidence.",
     description:
-      "A verifiable credential platform for SIH 2026 featuring tri-portal access (Student, Employer, Institution) and an explainable AI matching engine powered by Sentence Transformers and cosine similarity.",
+      "ProofTrail addresses a systemic hiring challenge: traditional resumes rely on unverified self-reported claims rather than demonstrated ability. Built as a digital skill passport for Smart India Hackathon (SIH 2026), it establishes a tamper-evident record linking evaluated competencies, projects, and certifications directly to audited evidence.",
     features: [
-      "AI matchmaking engine powered by Sentence Transformer embeddings & cosine similarity",
-      "Tri-portal architecture (Student, Employer, and Institution workflows)",
-      "Institutional credential verification pipelines for tamper-proof skill validation",
-      "Secure authentication layer utilizing JWT and OAuth protocols",
+      "Skill Passport: Centralized capability profile with verified skill scores and real-time status",
+      "Evidence Upload: Verification pipeline linking credential claims directly to tangible artifacts",
+      "AI Matchmaking Engine: Automated opportunity matching powered by evaluated capability models",
+      "Skill Gaps & Teams: Diagnostic competency mapping and collaborative project workflows",
+      "Privacy & Consent: Granular credential visibility and student-governed data sharing controls",
     ],
-    tags: ["React", "FastAPI", "PostgreSQL", "Python", "Sentence Transformers", "OAuth", "Tailwind CSS"],
-    bgImage:
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1600&q=80",
-    imageUrl:
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1600&q=80",
-    image:
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1600&q=80",
+    tags: ["SIH 2026", "Digital Skill Passport", "FastAPI", "React", "PostgreSQL", "Python", "OAuth 2.0", "Tailwind CSS"],
+    bgImage: "/projects/prooftrail.jpg",
+    imageUrl: "/projects/prooftrail.jpg",
+    image: "/projects/prooftrail.jpg",
     year: "2026",
     size: "small",
     cardBg: "card",
