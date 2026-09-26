@@ -8,17 +8,27 @@ export interface SkillGroup {
 
 export const skillCategories: SkillGroup[] = [
   {
+    category: "Languages",
+    description: "Systems programming, scripting, typed applications & semantic web markup",
+    skills: [
+      "C",
+      "Python",
+      "Java",
+      "JavaScript (ES6+)",
+      "TypeScript",
+      "HTML5",
+      "CSS3",
+    ],
+  },
+  {
     category: "Frontend",
-    description: "Component architecture, fluid animations & modern build tooling",
+    description: "Modular component architecture, modern frameworks, state management & reactive UI",
     skills: [
       "React",
       "Next.js",
       "Tailwind CSS",
-      "Framer Motion",
-      "JavaScript (ES6+)",
-      "HTML5",
-      "CSS3",
       "Bootstrap",
+      "Framer Motion",
       "React Router",
       "React Hook Form",
       "Vite",
@@ -26,28 +36,55 @@ export const skillCategories: SkillGroup[] = [
   },
   {
     category: "Backend",
-    description: "RESTful APIs, authentication systems & database management",
-    skills: ["Django", "Node.js", "REST APIs", "Python"],
+    description: "RESTful API engineering, backend services, secure authentication & database management",
+    skills: [
+      "Django",
+      "Node.js",
+      "FastAPI",
+      "REST APIs",
+      "Authentication & Authorization",
+      "Database Management",
+    ],
   },
   {
-    category: "3D & Animation",
-    description: "Tactile motion design, canvas interaction & kinetic storytelling",
-    skills: ["Three.js", "Framer Motion", "Spline Design"]
+    category: "Machine Learning & Data Science",
+    description: "Statistical modeling, supervised learning, data manipulation & numerical pipelines",
+    skills: [
+      "NumPy",
+      "Pandas",
+      "Matplotlib",
+      "SciPy",
+      "Scikit-Learn",
+      "CSV/Data Processing",
+    ],
   },
   {
-    category: "Design & Tools",
-    description: "Prototyping, version control & collaborative design systems",
-    skills: ["Figma", "Canva", "Git", "GitHub"],
+    category: "DevOps & Tools",
+    description: "Containerization, version control, interface design systems & developer tooling",
+    skills: [
+      "Docker",
+      "Git",
+      "GitHub",
+      "Figma",
+      "Canva",
+    ],
   },
   {
-    category: "Deployment",
-    description: "Continuous integration, edge delivery & cloud hosting",
-    skills: ["Vercel", "Netlify"],
+    category: "3D & Creative Tech",
+    description: "Tactile motion design, WebGL canvas interaction & kinetic 3D storytelling",
+    skills: [
+      "Three.js",
+      "Framer Motion",
+    ],
   },
   {
-    category: "Also Familiar With",
-    description: "Object-oriented programming & scientific computing fundamentals",
-    skills: ["Java", "NumPy"],
+    category: "Deployment & Cloud",
+    description: "Edge delivery networks, serverless infrastructure & cloud databases",
+    skills: [
+      "Vercel",
+      "Netlify",
+      "Firebase",
+    ],
   },
 ];
 
