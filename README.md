@@ -1,10 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash<div align="center">
+<div align="center">
 
 # DELTA — Personal Portfolio
 
@@ -25,16 +19,21 @@ First, run the development server:
 
 ## About
 
-This is my personal developer portfolio — built to showcase my work, skills, and design sensibility as a full-stack developer. Beyond the usual "about me and my projects" format, this site is also a playground for interactive 3D, scroll-driven storytelling, and motion design, built entirely with a custom animation system rather than a template.
+This is my personal developer portfolio — built to showcase my work, skills, and design sensibility as a full-stack developer. Beyond the usual "about me and my projects" format, this site is also a playground for interactive 3D, scroll-driven storytelling, and motion design, built with a custom animation system rather than a template.
 
 ## Features
 
-- **Custom 3D hero scene** — built with Three.js and React Three Fiber, with scroll-linked rotation, position, and idle motion
+- **Custom Three.js hero** — a glossy, metallic abstract object with cinematic entrance and scroll-linked rotation, position, and idle motion
+- **Interactive paper-scrunch portrait** — a triangulated, face-mapped mesh that unfolds from a crumpled state into a portrait, controlled by webcam hand-tracking (with a mouse/scroll fallback for anyone who declines camera access)
+- **Particle-based preloader** — a physics-driven loading sequence with an upward slide-out transition
 - **Scroll-driven storytelling** — sections reveal, stagger, and animate in as you scroll, powered by Framer Motion
 - **Animated Core Capabilities section** — alternating slide-in cards with a spring-based entrance
-- **Kinetic "Manifesto" section** — line-by-line scroll-triggered text reveal
+- **Kinetic "Manifesto" section** — scroll-triggered line-by-line text reveal paired with a custom ambient Three.js background element
+- **Tech Stack spotlight** — an interactive hover-reveal showcase of my core skills with custom display typography
+- **Animated Process timeline** — a scroll-driven, self-drawing connector line linking each stage of my workflow
+- **Refined navigation** — scroll-aware shrink and blur, animated active-link indicator, and a staggered mobile menu
 - **Working contact form** — a real backend using a Next.js API route and Resend, with server-side validation and spam protection
-- **Fully responsive** — animations gracefully simplify on mobile, and every motion sequence respects `prefers-reduced-motion`
+- **Fully responsive & accessible** — every animation gracefully simplifies on mobile and respects `prefers-reduced-motion`
 - **Warm, editorial design system** — a custom light-mode palette (cream, terracotta, espresso) with a deliberate, non-templated layout
 
 ## Tech Stack
@@ -76,17 +75,19 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+> **Note:** the paper-scrunch portrait effect and hand-tracking require camera permission, requested explicitly via an on-screen opt-in — it is never requested automatically.
+
 ## Project Structure
 
 ```
 ├── app/                  # Next.js App Router pages
-│   ├── page.tsx          # Landing page
-│   ├── about/             # About page
-│   ├── process/           # Process page
+│   ├── page.tsx          # Landing page (hero, tech stack, capabilities, manifesto)
+│   ├── about/             # About page (bio, tech stack groups, decorative shapes)
+│   ├── process/           # Process page (animated timeline)
 │   ├── contact/           # Contact page
 │   └── api/contact/       # Contact form backend (Resend)
 ├── components/           # Reusable UI and animation components
-├── public/               # Static assets
+├── public/               # Static assets, including portrait image for the hero effect
 └── styles/               # Global styles and theme tokens
 ```
 
@@ -108,32 +109,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 <div align="center">
 Built with care, one hover effect at a time.
 </div>
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
